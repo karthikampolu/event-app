@@ -7,8 +7,13 @@ const supabase = createClient(
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpqd3N5dXBua2F3Y214bXFzZHVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU1MzQyNjksImV4cCI6MjA3MTExMDI2OX0.3cfG1e65kwv07D-c6V2aFP3gTIeiojvsta2n9ij3P6I"
 );
 
+// Force dynamic rendering - no caching at all
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+export const fetchCache = 'force-no-store';
+
 export default async function EventsPage() {
-  // Fetch all events from the database
+  // Fetch all events from the database with cache-busting
   // We removed date filtering to ensure all events display properly
   // This prevents issues with timezone differences and date format mismatches
   const { data: events, error } = await supabase
@@ -19,6 +24,11 @@ export default async function EventsPage() {
   return (
     <div style={{ color: "white", padding: "20px", fontFamily: "Arial" }}>
       <h1>All Events</h1>
+      
+      {/* Display current timestamp to verify no caching */}
+      <p style={{ fontSize: "12px", color: "#666", marginBottom: "10px" }}>
+        Last updated: {new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}
+      </p>
       
       {/* Display error message if database query fails */}
       {error && (
