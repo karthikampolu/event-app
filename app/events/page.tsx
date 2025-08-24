@@ -4,7 +4,7 @@ import Link from "next/link";
 const supabase = createClient(
   "https://zjwsyupnkawcmxmqsdue.supabase.co",
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpqd3N5dXBua2F3Y214bXFzZHVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU1MzQyNjksImV4cCI6MjA3MTExMDI2OX0.3cfG1e65kwv07D-c6V2aFP3gTIeiojvsta2n9ij3P6I"
-);
+);//The Supabase Credentitals are disclosed these are client side
 
 export default async function EventsPage() {
   const today = new Date().toISOString().slice(0, 10);
