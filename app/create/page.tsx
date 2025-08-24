@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
-import { supabase } from "@/lib/supabase";
-
+import { createClient } from "@supabase/supabase-js";
 
 export default function CreateEventPage() {
   const [title, setTitle] = useState("");
@@ -16,7 +15,10 @@ export default function CreateEventPage() {
     setLoading(true);
     setMessage("");
 
-    
+    const supabase = createClient(
+      "https://zjwsyupnkawcmxmqsdue.supabase.co",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpqd3N5dXBua2F3Y214bXFzZHVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU1MzQyNjksImV4cCI6MjA3MTExMDI2OX0.3cfG1e65kwv07D-c6V2aFP3gTIeiojvsta2n9ij3P6I"
+    );
 
     try {
       const { error } = await supabase.from("events").insert({
