@@ -4,7 +4,7 @@ A modern, real-time event management application where users can create, view, a
 
 ## 🌐 Live Demo
 
-**[Visit the App](https://event-app-kappa-ten.vercel.app/login)**
+**[Visit the App](event-app-psi.vercel.app)**
 
 ## ✨ Features
 
