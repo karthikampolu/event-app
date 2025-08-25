@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Event Management App 🎉
 
-## Getting Started
+A modern, real-time event management application where users can create, view, and RSVP to events. Built with Next.js and Supabase for a seamless experience.
 
-First, run the development server:
+## 🌐 Live Demo
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+**[Visit the App](https://event-app-kappa-ten.vercel.app/login)**
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✨ Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Create Events**: Easy-to-use form to create new events with details like title, date, city, and description
+- **Browse Events**: View all upcoming and past events in a clean, card-based layout  
+- **Event Details**: Click on any event to see full details and RSVP information
+- **Real-time Updates**: Events appear immediately after creation - no caching delays
+- **Responsive Design**: Works perfectly on desktop, tablet, and mobile devices
+- **Clean UI**: Modern dark theme with smooth hover effects and intuitive navigation
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Technologies Used
 
-## Learn More
+- **Frontend**: Next.js 15 (React framework)
+- **Backend**: Supabase (PostgreSQL database + Auth)
+- **Deployment**: Vercel
+- **Styling**: Custom CSS with modern design principles
+- **Database**: PostgreSQL via Supabase
+- **Real-time**: Dynamic rendering with no caching for instant updates
 
-To learn more about Next.js, take a look at the following resources:
+## 🚀 Getting Started
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Prerequisites
+- A Supabase account
+- 
+## 🎨 Key Features Explained
+### Dynamic Event Loading
+Events load instantly without caching using Next.js dynamic rendering:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
