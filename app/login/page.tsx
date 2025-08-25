@@ -1,6 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
-import { supabase } from "@/lib/supabase";
+import { createClient } from "@supabase/supabase-js";
+
+// Force dynamic rendering to prevent prerendering issues during build
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
 // Main login component that provides a simple authentication system
 // This is a client-side component because it handles user interactions and state
@@ -11,19 +15,31 @@ export default function LoginPage() {
   const [error, setError] = useState(""); // Stores any error messages to display
   const [users, setUsers] = useState<any[]>([]); // Holds the list of available users from database
   const [isClient, setIsClient] = useState(false); // Prevents hydration errors by ensuring client-side rendering
+  const [supabase, setSupabase] = useState<any>(null); // Holds the Supabase client instance
 
   // Effect hook that runs when component mounts
   // Prevents hydration mismatches and loads initial data
   useEffect(() => {
     setIsClient(true); // Mark as client-side rendered
-    loadAllUsers(); // Fetch the list of available users
+    
+    // Initialize Supabase client only on client-side to prevent build errors
+    const supabaseClient = createClient(
+      "https://zjwsyupnkawcmxmqsdue.supabase.co",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpqd3N5dXBua2F3Y214bXFzZHVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU1MzQyNjksImV4cCI6MjA3MTExMDI2OX0.3cfG1e65kwv07D-c6V2aFP3gTIeiojvsta2n9ij3P6I"
+    );
+    setSupabase(supabaseClient);
+    
+    // Load users only after Supabase client is initialized
+    loadAllUsers(supabaseClient);
   }, []);
 
   // Fetches all users from the database to display available options
   // This helps users know which IDs they can use to log in
-  async function loadAllUsers() {
+  async function loadAllUsers(supabaseClient: any) {
+    if (!supabaseClient) return;
+    
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supabaseClient
         .from("users") // Query the users table
         .select("id, name, email") // Only fetch necessary fields
         .order("id"); // Sort by ID for consistent display
@@ -45,6 +61,12 @@ export default function LoginPage() {
   // Validates input, checks database, and redirects on success
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault(); // Prevent default form submission behavior
+    
+    if (!supabase) {
+      setError("System not ready, please wait...");
+      return;
+    }
+    
     setLoading(true); // Show loading state
     setError(""); // Clear any previous errors
 
@@ -104,7 +126,7 @@ export default function LoginPage() {
 
   // Loading state component - prevents hydration errors
   // Shows while component initializes on client side
-  if (!isClient) {
+  if (!isClient || !supabase) {
     return (
       <div style={{
         minHeight: "100vh",
@@ -114,7 +136,24 @@ export default function LoginPage() {
         justifyContent: "center",
         color: "white"
       }}>
-        Loading...
+        <div style={{ textAlign: "center" }}>
+          <div style={{ 
+            width: "40px", 
+            height: "40px", 
+            border: "4px solid #374151",
+            borderTop: "4px solid #60a5fa",
+            borderRadius: "50%",
+            animation: "spin 1s linear infinite",
+            margin: "0 auto 20px"
+          }}></div>
+          <p>Loading Event Manager...</p>
+          <style jsx>{`
+            @keyframes spin {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
+            }
+          `}</style>
+        </div>
       </div>
     );
   }

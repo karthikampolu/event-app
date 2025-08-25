@@ -32,12 +32,9 @@ export default function RootLayout({
   children: React.ReactNode; // All page content will be passed as children
 }>) {
   return (
-    <html lang="en"> {/* Set the document language for accessibility and SEO */}
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        // Apply both font variables as CSS classes and enable font antialiasing for smoother text rendering
-      >
-        {children} {/* Render the actual page content here - this is where all your pages will be displayed */}
+    <html lang="en">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        {children}
       </body>
     </html>
   );
