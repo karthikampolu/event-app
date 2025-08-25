@@ -44,7 +44,6 @@ function getCurrentUser() {
 
 /**
  * Main Home Page Component
- * 
  * Serves as the primary dashboard after user login, providing:
  * - Authentication state management
  * - Navigation to key app features
